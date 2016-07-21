@@ -1,19 +1,32 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="sistemas2014.unifebe.edu.br.infojobs">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <provider android:authorities="com.facebook.app.FacebookContentProvider1656270054699142"
+        android:name="com.facebook.FacebookContentProvider"
+        android:exported="true" />
+
     <meta-data android:name="DATABASE" android:value="InfJobs.db" />
     <meta-data android:name="VERSION" android:value="1" />
     <meta-data android:name="QUERY_LOG" android:value="true" />
     <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="sistemas2014.unifebe.edu.br.infojobs" />
 
     <application
-        android:name=".Model.InfoJobsApp"
+        android:name=".InfoJobsApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges=
+                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:label="@string/app_name" />
     </application>
 
 </manifest>
