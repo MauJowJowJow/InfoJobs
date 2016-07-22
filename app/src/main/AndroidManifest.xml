@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="sistemas2014.unifebe.edu.br.infojobs">
 
@@ -36,12 +37,12 @@
         <activity
             android:name=".View.LoginActivity"
             android:label="@string/title_activiy_Login">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".View.CadastroUsuarioView"></activity>
     </application>
 
 </manifest>
