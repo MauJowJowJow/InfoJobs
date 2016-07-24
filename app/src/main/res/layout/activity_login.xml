@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@color/background"
-    tools:context="sistemas2014.unifebe.edu.br.infojobs.View.LoginActivity">
+    tools:context=".Controller.LoginActivity">
 
     <!-- Login progress -->
     <ProgressBar
