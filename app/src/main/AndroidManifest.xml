@@ -16,6 +16,7 @@
         android:value="sistemas2014.unifebe.edu.br.infojobs" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <provider
         android:name="com.facebook.FacebookContentProvider"
@@ -46,7 +47,7 @@
         <activity
             android:name=".Controller.LoginActivity"
             android:label="@string/title_activiy_Login"></activity>
-        <activity android:name=".Controller.CadastroUsuarioView" />
+        <activity android:name=".Controller.CadastroUsuario" />
         <activity
             android:name=".Controller.GavetaPrincipal"
             android:label="@string/title_activity_gaveta_principal"

@@ -3,22 +3,20 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/nav_vagas"
+            android:title="Vagas" />
+        <item
+            android:id="@+id/nav_login"
             android:icon="@drawable/login"
             android:title="Login" />
+        <item
+            android:id="@+id/nav_share"
+            android:icon="@drawable/ic_menu_share"
+            android:title="Compartilhe" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/info"
+            android:title="Sobre nós" />
     </group>
-
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Compartilhe" />
-            <item
-                android:id="@+id/nav_about"
-                android:icon="@drawable/info"
-                android:title="Sobre nós" />
-        </menu>
-    </item>
 
 </menu>
