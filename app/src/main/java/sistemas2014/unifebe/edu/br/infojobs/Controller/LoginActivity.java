@@ -31,6 +31,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -41,6 +42,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import sistemas2014.unifebe.edu.br.infojobs.Helpers.FBGetUsuario;
+import sistemas2014.unifebe.edu.br.infojobs.Model.Usuario;
 import sistemas2014.unifebe.edu.br.infojobs.R;
 
 import static android.Manifest.permission.READ_CONTACTS;
@@ -72,6 +75,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private TextView txtCadastrese;
     CallbackManager callbackManager;
 
     @Override
@@ -102,6 +106,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
+        txtCadastrese = (TextView) findViewById(R.id.txtCadastrese);
+        txtCadastrese.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), CadastroUsuario.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
@@ -113,17 +127,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             new FacebookCallback<LoginResult>() {
                 @Override
                 public void onSuccess(LoginResult loginResult) {
-                    Toast.makeText(getApplicationContext(), "Login OK", Toast.LENGTH_LONG).show();
+                    validaUsuario();
                 }
 
                 @Override
                 public void onCancel() {
-                    Toast.makeText(getApplicationContext(), "Login Cancelado", Toast.LENGTH_LONG).show();
+                    Snackbar.make(getCurrentFocus(), "Login Cancelado", Snackbar.LENGTH_LONG).show();
                 }
 
                 @Override
                 public void onError(FacebookException exception) {
-                    Toast.makeText(getApplicationContext(), "Erro no login" + exception.getMessage(), Toast.LENGTH_LONG).show();
+                    Snackbar.make(getCurrentFocus(), "Erro no login" + exception.getMessage(), Snackbar.LENGTH_LONG).show();
                 }
         });
     }
@@ -384,6 +398,33 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = null;
             showProgress(false);
         }
+    }
+
+    private void validaUsuario(){
+        Usuario usuario = new Usuario();
+        String email;
+
+        email = AccessToken.getCurrentAccessToken().getUserId() + "@facebook.com";
+        List<Usuario> list = Usuario.find(Usuario.class, "email = ?", email);
+        if (list.size() > 0) {
+            usuario = list.get(0);
+        }else{
+            FBGetUsuario getUsuario = new FBGetUsuario();
+            try {
+                usuario.setNome(getUsuario.execute(new String[]{}).get());
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
+
+            usuario.setEmail(email);
+            usuario.setSenha("123"); // Gerar
+            usuario.save();
+
+            Intent i = new Intent(getApplicationContext(), CadastroUsuario.class);
+            i.putExtra("id", usuario.getId());
+            startActivity(i);
+        }
+        finish();
     }
 }
 

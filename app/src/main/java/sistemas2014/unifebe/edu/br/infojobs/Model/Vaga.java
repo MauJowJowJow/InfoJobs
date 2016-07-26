@@ -12,6 +12,10 @@ public class Vaga extends SugarRecord {
     private Empresa empresa;
     private double salario;
 
+    public Vaga(){
+
+    }
+
     public String getDescricao() {
         return descricao;
     }

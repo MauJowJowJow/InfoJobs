@@ -109,14 +109,15 @@ public class GavetaPrincipal extends AppCompatActivity
         }
 
         if(fragment != null) {
-            transaction.add(R.id.flContent, fragment);
+            transaction.replace(R.id.flContent, fragment);
             transaction.commit();
+
+            item.setChecked(true);
+            setTitle(item.getTitle());
         }else if(i != null){
             startActivity(i);
         }
 
-        item.setChecked(true);
-        setTitle(item.getTitle());
         return true;
     }
 }
