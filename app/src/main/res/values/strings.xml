@@ -21,6 +21,14 @@
     <string name="action_sign_in_Login">Login</string>
     <string name="prompt_password_senha">Senha</string>
     <string name="title_activiy_Login">Realize seu login</string>
-    <string name="activity_login_registrar">Esqueceu sua senha?</string>
+    <string name="activity_login_registrar">Crie seu cadastro ou</string>
     <string name="activity_login_novo_no_app">Primeira vez no InfoJobs?</string>
+    <string name="title_activity_consuta_vagas_view">ConsutaVagasView</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_gaveta_principal">GavetaPrincipal</string>
+    <string name="activity_login_esqueceu_senha">Esqueceu sua Senha?</string>
 </resources>

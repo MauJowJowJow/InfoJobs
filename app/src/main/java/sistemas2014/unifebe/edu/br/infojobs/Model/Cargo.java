@@ -8,4 +8,8 @@ import com.orm.SugarRecord;
 public class Cargo extends SugarRecord {
     private String nome;
     private AreaNegocio areaNegocio;
+
+    public Cargo(){
+
+    }
 }

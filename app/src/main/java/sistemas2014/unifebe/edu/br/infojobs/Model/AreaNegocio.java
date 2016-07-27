@@ -6,5 +6,7 @@ import com.orm.SugarRecord;
  * Created by mauma on 20/07/2016.
  */
 public class AreaNegocio extends SugarRecord {
+    public AreaNegocio(){
 
+    }
 }

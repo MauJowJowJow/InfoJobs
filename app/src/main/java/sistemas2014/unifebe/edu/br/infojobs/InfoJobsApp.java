@@ -5,6 +5,10 @@ import android.content.res.Configuration;
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.facebook.stetho.Stetho;
+import com.orm.SugarContext;
+
+import sistemas2014.unifebe.edu.br.infojobs.Model.Usuario;
 
 /**
  * Created by mauma on 18/07/2016.
@@ -21,11 +25,16 @@ public class InfoJobsApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
+
+        Stetho.initializeWithDefaults(this);
 
         FacebookSdk.sdkInitialize(getApplicationContext());
+
         AppEventsLogger.activateApp(this);
 
-        instance = this;
+        SugarContext.init(getApplicationContext());
+        Usuario.find(Usuario.class, "email = ?", "teste");
     }
 
     @Override
@@ -36,5 +45,7 @@ public class InfoJobsApp extends Application {
     @Override
     public void onTerminate() {
         super.onTerminate();
+
+        SugarContext.terminate();
     }
 }

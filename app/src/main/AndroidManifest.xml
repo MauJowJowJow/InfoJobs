@@ -2,16 +2,24 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="sistemas2014.unifebe.edu.br.infojobs">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <meta-data
+        android:name="DATABASE"
+        android:value="InfJobs.db" />
+    <meta-data
+        android:name="VERSION"
+        android:value="2" />
+    <meta-data
+        android:name="QUERY_LOG"
+        android:value="true" />
 
-    <provider android:authorities="com.facebook.app.FacebookContentProvider1656270054699142"
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <provider
         android:name="com.facebook.FacebookContentProvider"
+        android:authorities="com.facebook.app.FacebookContentProvider1656270054699142"
         android:exported="true" />
-
-    <meta-data android:name="DATABASE" android:value="InfJobs.db" />
-    <meta-data android:name="VERSION" android:value="1" />
-    <meta-data android:name="QUERY_LOG" android:value="true" />
-    <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="sistemas2014.unifebe.edu.br.infojobs" />
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -25,24 +33,29 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
-
-        <activity android:name="com.facebook.FacebookActivity"
-            android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:label="@string/app_name" />
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
 
         <activity
-            android:name=".View.LoginActivity"
-            android:label="@string/title_activiy_Login">
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name=".Controller.LoginActivity"
+            android:label="@string/title_activiy_Login"></activity>
+        <activity android:name=".Controller.CadastroUsuario" />
+        <activity
+            android:name=".Controller.GavetaPrincipal"
+            android:label="@string/title_activity_gaveta_principal"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.CadastroUsuarioView"></activity>
     </application>
 
 </manifest>
