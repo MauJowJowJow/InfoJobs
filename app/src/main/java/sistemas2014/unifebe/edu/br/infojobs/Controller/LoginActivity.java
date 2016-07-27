@@ -42,6 +42,7 @@ import com.facebook.login.widget.LoginButton;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import sistemas2014.unifebe.edu.br.infojobs.Helpers.FBGetUsuario;
 import sistemas2014.unifebe.edu.br.infojobs.Model.Usuario;
@@ -434,19 +435,31 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
 
             usuario.setEmail(email);
-            usuario.setSenha("123"); // Gerar
+            usuario.setSenha(geraSenhaAleatoria());
             usuario.save();
 
             Intent i = new Intent(getApplicationContext(), CadastroUsuario.class);
             i.putExtra("id", usuario.getId());
-            setUsuarioLogado(usuario);
             startActivity(i);
         }
+        setUsuarioLogado(usuario);
         finish();
     }
 
     private void logout(){
         UsuarioLogado.deleteAll(UsuarioLogado.class);
+    }
+
+    private String geraSenhaAleatoria(){
+        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890$#&*";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 18) {
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+        String saltStr = salt.toString();
+        return saltStr;
     }
 }
 

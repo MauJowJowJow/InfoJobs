@@ -21,6 +21,9 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.AccessToken;
+import com.facebook.login.LoginManager;
+
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
@@ -61,14 +64,6 @@ public class GavetaPrincipal extends AppCompatActivity
 
         txtUsuarioLogado = (TextView) nav_heaver_gaveta.findViewById(R.id.txtUsuarioLogado);
         menuLogIn = (MenuItem) gaveta_principal.findItem(R.id.nav_login);
-
-        menuLogIn.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                logout();
-                return false;
-            }
-        });
     }
 
     @Override
@@ -97,7 +92,7 @@ public class GavetaPrincipal extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
-            checaUsuarioLogado();
+            logout();
             return true;
         }
 
@@ -164,17 +159,17 @@ public class GavetaPrincipal extends AppCompatActivity
     private void setaUsuarioLogado(){
         if(usuario != null) {
             txtUsuarioLogado.setText(usuario.getNome() + usuario.getSobrenome());
-            menuLogIn.setTitle("LogOut");
+            menuLogIn.setVisible(false);
         }else{
             txtUsuarioLogado.setText("Nenhum usuário logado");
-            menuLogIn.setTitle("Login");
+            menuLogIn.setVisible(true);
         }
     }
 
     private void logout(){
         if(usuario != null){
             new AlertDialog.Builder(this)
-                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setIcon(android.R.drawable.ic_dialog_info)
                     .setTitle("LogOut")
                     .setMessage("Tem certeza que deseja realizar o logout?")
                     .setPositiveButton("Sim", new DialogInterface.OnClickListener()
@@ -182,14 +177,20 @@ public class GavetaPrincipal extends AppCompatActivity
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             UsuarioLogado.deleteAll(UsuarioLogado.class);
-                            Snackbar.make(getCurrentFocus(), "Sim", Snackbar.LENGTH_LONG).show();
+
+                            if(AccessToken.getCurrentAccessToken() != null){
+                                LoginManager.getInstance().logOut();
+                            }
+
+                            Snackbar.make(getCurrentFocus(), "Logout feito com sucesso!", Snackbar.LENGTH_LONG).show();
+                            checaUsuarioLogado();
                         }
 
                     })
                     .setNegativeButton("Não", null)
                     .show();
-
-            checaUsuarioLogado();
+        }else{
+            Snackbar.make(getCurrentFocus(), "Nenhum usuário logado!", Snackbar.LENGTH_LONG).show();
         }
     }
 }
