@@ -1,8 +1,10 @@
 package sistemas2014.unifebe.edu.br.infojobs.Controller;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -35,6 +37,7 @@ public class GavetaPrincipal extends AppCompatActivity
 
     private Usuario usuario;
     private TextView txtUsuarioLogado;
+    private MenuItem menuLogIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +57,18 @@ public class GavetaPrincipal extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         View nav_heaver_gaveta = navigationView.getHeaderView(0);
+        Menu gaveta_principal = navigationView.getMenu();
 
         txtUsuarioLogado = (TextView) nav_heaver_gaveta.findViewById(R.id.txtUsuarioLogado);
+        menuLogIn = (MenuItem) gaveta_principal.findItem(R.id.nav_login);
+
+        menuLogIn.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                logout();
+                return false;
+            }
+        });
     }
 
     @Override
@@ -83,7 +96,8 @@ public class GavetaPrincipal extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_logout) {
+            checaUsuarioLogado();
             return true;
         }
 
@@ -143,16 +157,39 @@ public class GavetaPrincipal extends AppCompatActivity
         usuario = null;
         while(usuarioLogado.hasNext()){
             usuario = usuarioLogado.next().getUsuario();
-            setaUsuarioLogado();
-            return;
         }
+        setaUsuarioLogado();
     }
 
     private void setaUsuarioLogado(){
         if(usuario != null) {
             txtUsuarioLogado.setText(usuario.getNome() + usuario.getSobrenome());
+            menuLogIn.setTitle("LogOut");
         }else{
             txtUsuarioLogado.setText("Nenhum usuário logado");
+            menuLogIn.setTitle("Login");
+        }
+    }
+
+    private void logout(){
+        if(usuario != null){
+            new AlertDialog.Builder(this)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setTitle("LogOut")
+                    .setMessage("Tem certeza que deseja realizar o logout?")
+                    .setPositiveButton("Sim", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            UsuarioLogado.deleteAll(UsuarioLogado.class);
+                            Snackbar.make(getCurrentFocus(), "Sim", Snackbar.LENGTH_LONG).show();
+                        }
+
+                    })
+                    .setNegativeButton("Não", null)
+                    .show();
+
+            checaUsuarioLogado();
         }
     }
 }

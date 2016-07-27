@@ -32,6 +32,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
+import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -77,7 +78,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
     private TextView txtCadastrese;
-    CallbackManager callbackManager;
+    private CallbackManager callbackManager;
+    private AccessTokenTracker fbTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,6 +143,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     Snackbar.make(getCurrentFocus(), "Erro no login" + exception.getMessage(), Snackbar.LENGTH_LONG).show();
                 }
         });
+
+        fbTracker = new AccessTokenTracker() {
+            @Override
+            protected void onCurrentAccessTokenChanged(AccessToken accessToken, AccessToken accessToken2) {
+                if (accessToken2 == null) {
+                    logout();
+                }
+            }
+        };
     }
 
     @Override
@@ -247,13 +258,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }catch (Exception ex){
                 ex.printStackTrace();
             }
-            if(usuario != null){
-                UsuarioLogado.deleteAll(UsuarioLogado.class);
-                UsuarioLogado usuarioLogado = new UsuarioLogado();
-                usuarioLogado.setUsuario(usuario);
-                usuarioLogado.save();
-                finish();
-            }
+            setUsuarioLogado(usuario);
+        }
+    }
+
+    private void setUsuarioLogado(Usuario usuario){
+        if(usuario != null){
+            UsuarioLogado.deleteAll(UsuarioLogado.class);
+            UsuarioLogado usuarioLogado = new UsuarioLogado();
+            usuarioLogado.setUsuario(usuario);
+            usuarioLogado.save();
+            finish();
         }
     }
 
@@ -424,9 +439,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             Intent i = new Intent(getApplicationContext(), CadastroUsuario.class);
             i.putExtra("id", usuario.getId());
+            setUsuarioLogado(usuario);
             startActivity(i);
         }
         finish();
+    }
+
+    private void logout(){
+        UsuarioLogado.deleteAll(UsuarioLogado.class);
     }
 }
 
