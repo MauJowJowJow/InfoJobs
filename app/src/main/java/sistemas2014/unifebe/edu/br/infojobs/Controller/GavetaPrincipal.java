@@ -16,27 +16,33 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import sistemas2014.unifebe.edu.br.infojobs.Model.Usuario;
+import sistemas2014.unifebe.edu.br.infojobs.Model.UsuarioLogado;
 import sistemas2014.unifebe.edu.br.infojobs.R;
 
 public class GavetaPrincipal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+
+    private Usuario usuario;
+    private TextView txtUsuarioLogado;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_gaveta_principal);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -46,6 +52,10 @@ public class GavetaPrincipal extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View nav_heaver_gaveta = navigationView.getHeaderView(0);
+
+        txtUsuarioLogado = (TextView) nav_heaver_gaveta.findViewById(R.id.txtUsuarioLogado);
     }
 
     @Override
@@ -119,5 +129,30 @@ public class GavetaPrincipal extends AppCompatActivity
         }
 
         return true;
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        checaUsuarioLogado();
+    }
+
+    private void checaUsuarioLogado(){
+        Iterator<UsuarioLogado> usuarioLogado = UsuarioLogado.findAll(UsuarioLogado.class);
+        usuario = null;
+        while(usuarioLogado.hasNext()){
+            usuario = usuarioLogado.next().getUsuario();
+            setaUsuarioLogado();
+            return;
+        }
+    }
+
+    private void setaUsuarioLogado(){
+        if(usuario != null) {
+            txtUsuarioLogado.setText(usuario.getNome() + usuario.getSobrenome());
+        }else{
+            txtUsuarioLogado.setText("Nenhum usuário logado");
+        }
     }
 }

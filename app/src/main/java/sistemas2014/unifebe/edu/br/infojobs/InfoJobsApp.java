@@ -25,6 +25,7 @@ public class InfoJobsApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
 
         Stetho.initializeWithDefaults(this);
 
@@ -34,7 +35,6 @@ public class InfoJobsApp extends Application {
 
         SugarContext.init(getApplicationContext());
         Usuario.find(Usuario.class, "email = ?", "teste");
-        instance = this;
     }
 
     @Override
