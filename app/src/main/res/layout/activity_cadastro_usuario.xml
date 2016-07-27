@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:weightSum="1">
 
-    <HorizontalScrollView
+    <ScrollView
         android:layout_width="347dp"
-        android:layout_height="477dp"
+        android:layout_height="555dp"
         android:id="@+id/horizontalScrollView"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp" >
@@ -18,51 +19,95 @@
             <EditText
                 android:layout_width="345dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtNome" />
+                android:id="@+id/txtNome"
+                android:hint="Nome"/>
 
             <EditText
                 android:layout_width="345dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtSobrenome" />
+                android:id="@+id/txtSobrenome"
+                android:hint="Sobrenome"/>
 
             <EditText
                 android:layout_width="345dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtEndereco" />
+                android:id="@+id/txtEndereco"
+                android:hint="Endereço"/>
 
             <EditText
                 android:layout_width="345dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtBairro" />
+                android:id="@+id/txtBairro"
+                android:hint="Bairro"/>
 
             <EditText
                 android:layout_width="345dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtCidade" />
+                android:id="@+id/txtCidade"
+                android:hint="Cidade"/>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="52dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center_horizontal">
 
                 <EditText
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/txtCEP" />
+                    android:id="@+id/txtCEP"
+                    android:hint="CEP"/>
 
                 <Spinner
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/spinnerCEP" />
+                    android:layout_height="match_parent"
+                    android:id="@+id/spinnerUF" />
             </LinearLayout>
 
             <EditText
                 android:layout_width="345dp"
+                android:layout_height="40dp"
+                android:id="@+id/txtTelCelular"
+                android:hint="Tel Celular"
+                android:phoneNumber="true" />
+
+            <EditText
+                android:layout_width="345dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText" />
+                android:id="@+id/txtTelResidencial"
+                android:hint="Tel Residencial"
+                android:phoneNumber="true" />
+
+            <EditText
+                android:layout_width="345dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtEmail"
+                android:hint="E-mail"
+                android:inputType="textEmailAddress"/>
+
+            <EditText
+                android:layout_width="345dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtSenha"
+                android:hint="Senha"
+                android:password="true" />
+
+            <EditText
+                android:layout_width="345dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtConfSenha"
+                android:hint="Confirmar Senha"
+                android:password="true" />
+
+            <Button
+                android:id="@+id/login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp" />
 
         </LinearLayout>
-    </HorizontalScrollView>
+    </ScrollView>
 
 </LinearLayout>
