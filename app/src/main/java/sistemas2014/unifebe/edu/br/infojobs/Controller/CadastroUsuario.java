@@ -48,7 +48,7 @@ public class CadastroUsuario extends AppCompatActivity {
             txtNome.setText(usuario.getNome());
         }
 
-        Button txtSalvar = (Button) findViewById(R.id.txtSalvar);
+        Button txtSalvar = (Button) findViewById(R.id.btnSalvar);
         txtSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
