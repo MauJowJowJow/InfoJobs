@@ -32,6 +32,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
+import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -44,6 +45,7 @@ import java.util.List;
 
 import sistemas2014.unifebe.edu.br.infojobs.Helpers.FBGetUsuario;
 import sistemas2014.unifebe.edu.br.infojobs.Model.Usuario;
+import sistemas2014.unifebe.edu.br.infojobs.Model.UsuarioLogado;
 import sistemas2014.unifebe.edu.br.infojobs.R;
 
 import static android.Manifest.permission.READ_CONTACTS;
@@ -76,7 +78,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
     private TextView txtCadastrese;
-    CallbackManager callbackManager;
+    private CallbackManager callbackManager;
+    private AccessTokenTracker fbTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,6 +143,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     Snackbar.make(getCurrentFocus(), "Erro no login" + exception.getMessage(), Snackbar.LENGTH_LONG).show();
                 }
         });
+
+        fbTracker = new AccessTokenTracker() {
+            @Override
+            protected void onCurrentAccessTokenChanged(AccessToken accessToken, AccessToken accessToken2) {
+                if (accessToken2 == null) {
+                    logout();
+                }
+            }
+        };
     }
 
     @Override
@@ -239,7 +251,24 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // perform the user login attempt.
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+
+            Usuario usuario=null;
+            try {
+                 usuario = mAuthTask.execute((Void) null).get();
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
+            setUsuarioLogado(usuario);
+        }
+    }
+
+    private void setUsuarioLogado(Usuario usuario){
+        if(usuario != null){
+            UsuarioLogado.deleteAll(UsuarioLogado.class);
+            UsuarioLogado usuarioLogado = new UsuarioLogado();
+            usuarioLogado.setUsuario(usuario);
+            usuarioLogado.save();
+            finish();
         }
     }
 
@@ -250,7 +279,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() > 2;
     }
 
     /**
@@ -347,7 +376,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+    public class UserLoginTask extends AsyncTask<Void, Void, Usuario> {
 
         private final String mEmail;
         private final String mPassword;
@@ -358,36 +387,24 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
 
         @Override
-        protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
+        protected Usuario doInBackground(Void... params) {
+            List<Usuario> list = Usuario.find(Usuario.class, "email = ?", mEmail);
 
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
+            for (Usuario usuario : list) {
+                if(usuario.getSenha().equals(mPassword)){
+                    return usuario;
                 }
             }
 
-            // TODO: register the new account here.
-            return true;
+            return null;
         }
 
         @Override
-        protected void onPostExecute(final Boolean success) {
+        protected void onPostExecute(Usuario usuario) {
             mAuthTask = null;
             showProgress(false);
 
-            if (success) {
-                finish();
-            } else {
+            if (usuario == null) {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
             }
@@ -422,9 +439,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             Intent i = new Intent(getApplicationContext(), CadastroUsuario.class);
             i.putExtra("id", usuario.getId());
+            setUsuarioLogado(usuario);
             startActivity(i);
         }
         finish();
+    }
+
+    private void logout(){
+        UsuarioLogado.deleteAll(UsuarioLogado.class);
     }
 }
 
