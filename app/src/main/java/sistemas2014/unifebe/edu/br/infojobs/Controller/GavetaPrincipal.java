@@ -37,7 +37,6 @@ import sistemas2014.unifebe.edu.br.infojobs.R;
 public class GavetaPrincipal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-
     private Usuario usuario;
     private TextView txtUsuarioLogado;
     private MenuItem menuLogIn;
@@ -158,7 +157,7 @@ public class GavetaPrincipal extends AppCompatActivity
 
     private void setaUsuarioLogado(){
         if(usuario != null) {
-            txtUsuarioLogado.setText(usuario.getNome() + usuario.getSobrenome());
+            txtUsuarioLogado.setText(usuario.getNome() + " " + usuario.getSobrenome());
             menuLogIn.setVisible(false);
         }else{
             txtUsuarioLogado.setText("Nenhum usuário logado");

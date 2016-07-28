@@ -3,53 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="sistemas2014.unifebe.edu.br.infojobs.Controller.ConsultaVagas">
+    tools:context="sistemas2014.unifebe.edu.br.infojobs.Controller.ConsultaVagas"
+    >
 
-    <ScrollView
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/scrollView" >
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="1">
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="14.36"
-                android:gravity="center"
-                android:weightSum="1">
-
-                <EditText
-                    android:layout_width="293dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/txtCidade"
-                    android:hint="Cidade"
-                    android:layout_weight="0.22" />
-
-                <ImageButton
-                    android:layout_width="26dp"
-                    android:layout_height="31dp"
-                    android:id="@+id/btnLocation"
-                    android:src="@android:drawable/ic_menu_mylocation" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ListView
-                    android:layout_width="match_parent"
-                    android:layout_height="520dp"
-                    android:id="@+id/listVagas"
-                    android:choiceMode="singleChoice" />
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
-
+        android:id="@+id/listVagas"
+        android:choiceMode="singleChoice"
+        android:paddingTop="?attr/actionBarSize"
+        android:clipToPadding="false"/>
 </LinearLayout>

@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:baselineAligned="false"
+    android:orientation="vertical">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="293dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtCidade"
+            android:hint="Cidade"
+            android:layout_weight="0.22" />
+
+        <ImageButton
+            android:layout_width="26dp"
+            android:layout_height="31dp"
+            android:id="@+id/btnLocation"
+            android:src="@android:drawable/ic_menu_mylocation" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|center_horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Filtrar"
+            android:id="@+id/btnFiltrar" />
+    </LinearLayout>
+</LinearLayout>

@@ -11,21 +11,22 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.provider.Settings;
-import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListView;
+import android.widget.TextView;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import sistemas2014.unifebe.edu.br.infojobs.Controller.RecyclerAdapter.VagasAdapter;
 import sistemas2014.unifebe.edu.br.infojobs.Model.Endereco;
 import sistemas2014.unifebe.edu.br.infojobs.Model.Vaga;
 import sistemas2014.unifebe.edu.br.infojobs.R;
@@ -39,8 +40,12 @@ import sistemas2014.unifebe.edu.br.infojobs.R;
  * create an instance of this fragment.
  */
 public class ConsultaVagas extends Fragment {
-
+    private View header;
     private View inflatedView;
+    private EditText txtCidade;
+    private Button btnFiltrar;
+
+    private VagasAdapter vagasAdapter;
     private ArrayList<Vaga> vagas;
     private OnFragmentInteractionListener mListener;
 
@@ -65,31 +70,34 @@ public class ConsultaVagas extends Fragment {
         // Inflate the layout for this fragment
         this.inflatedView = inflater.inflate(R.layout.fragment_consulta_vagas, container, false);
 
-        ImageButton BtnLocation = (ImageButton) inflatedView.findViewById(R.id.btnLocation);
+        RecyclerView recyclerView = (RecyclerView) inflatedView.findViewById(R.id.listVagas);
+        header = inflater.inflate(R.layout.header_consulta_vagas, null);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(inflatedView.getContext()));
+        recyclerView.setAdapter(getVagas(header));
+
+        txtCidade = (EditText) header.findViewById(R.id.txtCidade);
+        btnFiltrar = (Button) header.findViewById(R.id.btnFiltrar);
+
+        btnFiltrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                filtraVagas();
+            }
+        });
+
+        ImageButton BtnLocation = (ImageButton) header.findViewById(R.id.btnLocation);
 
         BtnLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                EditText txtCidade = (EditText) inflatedView.findViewById(R.id.txtCidade);
-                txtCidade.setText(getCidadeAtual(inflatedView.getContext()));
+                EditText txtCidade = (EditText) header.findViewById(R.id.txtCidade);
+                txtCidade.setText(getCidadeAtual(header.getContext()));
             }
         });
 
-        ListView listVagas = (ListView) inflatedView.findViewById(R.id.listVagas);
-
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
-                (inflatedView.getContext(),android.R.layout.simple_list_item_1,
-                        getVagas());
-        listVagas.setAdapter(dataAdapter);
-
-        listVagas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Snackbar.make(view, "Vaga selecionada: " + vagas.get(i).getDescricao(), Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        //listVagas.addHeaderView(header);
 
         return inflatedView;
     }
@@ -182,22 +190,38 @@ public class ConsultaVagas extends Fragment {
         return cidade;
     }
 
-    private List<String> getVagas(){
+    private VagasAdapter getVagas(View header){
         vagas = new ArrayList<>();
-        List<String> vagasDescricao = new ArrayList<>();
+        vagasAdapter = new VagasAdapter();
+        vagasAdapter.addHeader(header);
 
         for(int i = 0; i < 25; i++){
             Vaga vaga = new Vaga();
             Endereco endereco = new Endereco();
-            endereco.setCidade("Brusque");
+            if(i<10) {
+                endereco.setCidade("Brusque");
+            }else{
+                endereco.setCidade("Blumenal");
+            }
 
             vaga.setDescricao("Vaga " + i);
             vaga.setEndereco(endereco);
 
             vagas.add(vaga);
-            vagasDescricao.add((vaga.getDescricao()));
         }
 
-        return vagasDescricao;
+        vagasAdapter.updateList(vagas);
+        return vagasAdapter;
+    }
+
+    private void filtraVagas(){
+        for(Vaga vaga : vagas){
+
+            if(!vaga.getEndereco().getCidade().toLowerCase().equals(txtCidade.getText().toString().toLowerCase())){
+                vagas.remove(vaga);
+            }
+        }
+
+        vagasAdapter.updateList(vagas);
     }
 }
