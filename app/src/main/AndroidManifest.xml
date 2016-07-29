@@ -12,7 +12,6 @@
         android:name="QUERY_LOG"
         android:value="true" />
 
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
@@ -44,7 +43,7 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name=".Controller.LoginActivity"
-            android:label="@string/title_activiy_Login"></activity>
+            android:label="@string/title_activiy_Login" />
         <activity android:name=".Controller.CadastroUsuario" />
         <activity
             android:name=".Controller.GavetaPrincipal"
@@ -56,6 +55,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Controller.DetalhesVaga"
+            android:label="@string/title_activity_detalhes_vaga"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

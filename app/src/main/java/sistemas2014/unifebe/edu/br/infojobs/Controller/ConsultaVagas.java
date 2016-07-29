@@ -2,15 +2,9 @@ package sistemas2014.unifebe.edu.br.infojobs.Controller;
 
 import android.content.Context;
 import android.content.Intent;
-import android.location.Address;
-import android.location.Criteria;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.provider.Settings;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,13 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.TextView;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 import sistemas2014.unifebe.edu.br.infojobs.Controller.RecyclerAdapter.VagasAdapter;
 import sistemas2014.unifebe.edu.br.infojobs.Model.Endereco;
@@ -76,29 +65,6 @@ public class ConsultaVagas extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(inflatedView.getContext()));
         recyclerView.setAdapter(getVagas(header));
 
-        txtCidade = (EditText) header.findViewById(R.id.txtCidade);
-        btnFiltrar = (Button) header.findViewById(R.id.btnFiltrar);
-
-        btnFiltrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                filtraVagas();
-            }
-        });
-
-        ImageButton BtnLocation = (ImageButton) header.findViewById(R.id.btnLocation);
-
-        BtnLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                EditText txtCidade = (EditText) header.findViewById(R.id.txtCidade);
-                txtCidade.setText(getCidadeAtual(header.getContext()));
-            }
-        });
-
-        //listVagas.addHeaderView(header);
-
         return inflatedView;
     }
 
@@ -141,56 +107,9 @@ public class ConsultaVagas extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    private String getCidadeAtual(Context context){
-        String cidade="";
-
-        LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-
-        boolean on = false;
-        try {
-             on = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        }catch (Exception ex){
-            ex.printStackTrace();
-        }
-
-        if(!on) {
-            Intent onGPS = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivity(onGPS);
-        }
-
-        Criteria criteria = new Criteria();
-        String provider = locationManager.getBestProvider(criteria, false);
-        Location location = null;
-        try{
-             location = locationManager.getLastKnownLocation(provider);
-        }catch (SecurityException ex){
-            ex.printStackTrace();
-        }
-
-        if (location != null) {
-            Geocoder geoCoder = new Geocoder(context, Locale.getDefault());
-
-            List<Address> list=null;
-            try {
-                 list = geoCoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-            }catch (IOException ex){
-                ex.printStackTrace();
-            }
-
-            if (list != null) {
-                if(list.size() > 0){
-                    Address address = list.get(0);
-
-                    cidade = address.getLocality();
-                }
-            }
-
-        }
-
-        return cidade;
-    }
-
     private VagasAdapter getVagas(View header){
+        if(vagasAdapter != null)  return vagasAdapter;
+
         vagas = new ArrayList<>();
         vagasAdapter = new VagasAdapter();
         vagasAdapter.addHeader(header);
@@ -204,24 +123,17 @@ public class ConsultaVagas extends Fragment {
                 endereco.setCidade("Blumenal");
             }
 
+            vaga.setId(Long.valueOf(i));
             vaga.setDescricao("Vaga " + i);
             vaga.setEndereco(endereco);
 
             vagas.add(vaga);
+            vaga.save();
         }
 
         vagasAdapter.updateList(vagas);
         return vagasAdapter;
     }
 
-    private void filtraVagas(){
-        for(Vaga vaga : vagas){
 
-            if(!vaga.getEndereco().getCidade().toLowerCase().equals(txtCidade.getText().toString().toLowerCase())){
-                vagas.remove(vaga);
-            }
-        }
-
-        vagasAdapter.updateList(vagas);
-    }
 }

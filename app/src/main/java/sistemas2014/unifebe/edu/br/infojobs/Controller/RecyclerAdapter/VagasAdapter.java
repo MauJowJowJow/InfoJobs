@@ -1,12 +1,10 @@
 package sistemas2014.unifebe.edu.br.infojobs.Controller.RecyclerAdapter;
 
-import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -21,7 +19,7 @@ public class VagasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private static final int HEADER_VIEW = 1;
 
     private List<View> mHeader = new ArrayList<>();
-    private List<Vaga> mData = Collections.emptyList();
+    private List<Vaga> mData = new ArrayList<>();
 
     public VagasAdapter() {
         // Pass context or other static stuff that will be needed.
@@ -55,6 +53,10 @@ public class VagasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         notifyItemRemoved(position);
     }
 
+    public Vaga getItem(int position) {
+        return mData.get(position);
+    }
+
     public void updateList(List<Vaga> data) {
         mData = data;
         notifyDataSetChanged();
@@ -86,13 +88,13 @@ public class VagasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         if (viewType == HEADER_VIEW) {
             v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.header_consulta_vagas, viewGroup, false);
-            VagasHeaderViewHolder vh = new VagasHeaderViewHolder(v);
+            VagasHeaderViewHolder vh = new VagasHeaderViewHolder(v, this);
 
             return vh;
         }
 
         v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.lista_item_consulta_vagas, viewGroup, false);
-        VagasViewHolder vh = new VagasViewHolder(v);
+        VagasViewHolder vh = new VagasViewHolder(v, this);
 
         return vh;
     }
