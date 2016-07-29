@@ -32,7 +32,6 @@ import sistemas2014.unifebe.edu.br.infojobs.R;
  */
 public class VagasHeaderViewHolder extends RecyclerView.ViewHolder {
     private VagasAdapter adapter;
-    LinearLayout base;
     private Button btnFiltrar;
     private EditText txtCidade;
     private ImageButton btnLocation;

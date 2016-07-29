@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import sistemas2014.unifebe.edu.br.infojobs.Controller.RecyclerAdapter.VagasAdapter;
 import sistemas2014.unifebe.edu.br.infojobs.Model.Endereco;
@@ -108,27 +109,35 @@ public class ConsultaVagas extends Fragment {
     }
 
     private VagasAdapter getVagas(View header){
-        if(vagasAdapter != null)  return vagasAdapter;
-
         vagas = new ArrayList<>();
         vagasAdapter = new VagasAdapter();
         vagasAdapter.addHeader(header);
 
-        for(int i = 0; i < 25; i++){
-            Vaga vaga = new Vaga();
-            Endereco endereco = new Endereco();
-            if(i<10) {
-                endereco.setCidade("Brusque");
-            }else{
-                endereco.setCidade("Blumenal");
+        Iterator<Vaga> vagasAtuais = Vaga.findAll(Vaga.class);
+        if(vagasAtuais.hasNext()) {
+            while (vagasAtuais.hasNext()) {
+                Vaga vaga = vagasAtuais.next();
+
+                vagas.add(vaga);
             }
+        }else {
 
-            vaga.setId(Long.valueOf(i));
-            vaga.setDescricao("Vaga " + i);
-            vaga.setEndereco(endereco);
+            for (int i = 0; i < 25; i++) {
+                Vaga vaga = new Vaga();
+                Endereco endereco = new Endereco();
+                if (i < 10) {
+                    endereco.setCidade("Brusque");
+                } else {
+                    endereco.setCidade("Blumenal");
+                }
+                endereco.save();
 
-            vagas.add(vaga);
-            vaga.save();
+                vaga.setDescricao("Vaga " + i);
+                vaga.setEndereco(endereco);
+
+                vagas.add(vaga);
+                vaga.save();
+            }
         }
 
         vagasAdapter.updateList(vagas);

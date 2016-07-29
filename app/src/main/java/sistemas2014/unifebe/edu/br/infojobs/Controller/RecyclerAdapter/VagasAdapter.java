@@ -104,14 +104,12 @@ public class VagasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         try {
             if (viewHolder instanceof VagasHeaderViewHolder) {
                 VagasHeaderViewHolder vh = (VagasHeaderViewHolder) viewHolder;
-                View v = mHeader.get(position);
+                View v = mHeader.get(position-1);
 
-                vh.base.removeAllViews();
-                vh.base.addView(v);
             } else if (viewHolder instanceof VagasViewHolder) {
                 VagasViewHolder vh = (VagasViewHolder) viewHolder;
 
-                vh.txtNome.setText(mData.get(position).getDescricao());
+                vh.txtNome.setText(mData.get(position-1).getDescricao());
             }
         } catch (Exception e) {
             e.printStackTrace();
