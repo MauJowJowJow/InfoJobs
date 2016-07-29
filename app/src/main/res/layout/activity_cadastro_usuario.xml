@@ -18,35 +18,57 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <EditText
                 android:layout_width="345dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtNome"
-                android:hint="Nome"/>
+                android:hint="Nome"
+                />
+            </android.support.design.widget.TextInputLayout>
 
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <EditText
                 android:layout_width="345dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtSobrenome"
                 android:hint="Sobrenome"/>
+            </android.support.design.widget.TextInputLayout>
 
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <EditText
                 android:layout_width="345dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtEndereco"
                 android:hint="Endereço"/>
+            </android.support.design.widget.TextInputLayout>
 
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <EditText
                 android:layout_width="345dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtBairro"
                 android:hint="Bairro"/>
+            </android.support.design.widget.TextInputLayout>
 
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <EditText
                 android:layout_width="345dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtCidade"
                 android:hint="Cidade"/>
+            </android.support.design.widget.TextInputLayout>
+
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -54,11 +76,16 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal">
 
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
                 <EditText
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/txtCEP"
                     android:hint="CEP"/>
+                </android.support.design.widget.TextInputLayout>
 
                 <Spinner
                     android:layout_width="wrap_content"
@@ -66,40 +93,61 @@
                     android:id="@+id/spinnerUF" />
             </LinearLayout>
 
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <EditText
                 android:layout_width="345dp"
                 android:layout_height="40dp"
                 android:id="@+id/txtTelCelular"
                 android:hint="Tel Celular"
                 android:phoneNumber="true" />
+            </android.support.design.widget.TextInputLayout>
 
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <EditText
                 android:layout_width="345dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtTelResidencial"
                 android:hint="Tel Residencial"
                 android:phoneNumber="true" />
+            </android.support.design.widget.TextInputLayout>
 
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <EditText
                 android:layout_width="345dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtEmail"
                 android:hint="E-mail"
                 android:inputType="textEmailAddress"/>
+            </android.support.design.widget.TextInputLayout>
 
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <EditText
                 android:layout_width="345dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtSenha"
                 android:hint="Senha"
                 android:password="true" />
+            </android.support.design.widget.TextInputLayout>
 
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <EditText
                 android:layout_width="345dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtConfSenha"
                 android:hint="Confirmar Senha"
                 android:password="true" />
+            </android.support.design.widget.TextInputLayout>
+
 
             <Button
                 android:layout_width="wrap_content"
