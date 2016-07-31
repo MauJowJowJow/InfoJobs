@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import sistemas2014.unifebe.edu.br.infojobs.Controller.RecyclerAdapter.VagasAdapter;
+import sistemas2014.unifebe.edu.br.infojobs.Model.Cargo;
+import sistemas2014.unifebe.edu.br.infojobs.Model.Empresa;
 import sistemas2014.unifebe.edu.br.infojobs.Model.Endereco;
 import sistemas2014.unifebe.edu.br.infojobs.Model.Vaga;
 import sistemas2014.unifebe.edu.br.infojobs.R;
@@ -122,17 +124,55 @@ public class ConsultaVagas extends Fragment {
             }
         }else {
 
-            for (int i = 0; i < 25; i++) {
+            for (int i = 1; i < 15; i++) {
                 Vaga vaga = new Vaga();
+                Cargo cargo = new Cargo();
+                Empresa empresa = new Empresa();
+
                 Endereco endereco = new Endereco();
-                if (i < 10) {
+                if (i < 7) {
                     endereco.setCidade("Brusque");
+                    endereco.setBairro("Centro");
                 } else {
-                    endereco.setCidade("Blumenal");
+                    endereco.setCidade("Blumenau");
+                    endereco.setBairro("Bom Retiro");
+
                 }
+                endereco.setEstado("SC");
                 endereco.save();
 
                 vaga.setDescricao("Vaga " + i);
+
+                vaga.setObservacoes("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+
+                if (i < 5) {
+                    vaga.setSalario(1500.00);
+                } else if(i > 5 && i < 10){
+                    vaga.setSalario(5900.00);
+                }else{
+                    vaga.setSalario(900.00);
+                }
+
+                if (i < 5) {
+                    cargo.setNome("Programador");
+                } else if(i > 5 && i < 10){
+                    cargo.setNome("DBA");
+                }else{
+                    cargo.setNome("Analista");
+                }
+                cargo.save();
+
+                if (i < 5) {
+                    empresa.setNomeEmpresa("TecMicro");
+                } else if(i > 5 && i < 10){
+                    empresa.setNomeEmpresa("T-Systems");
+                }else{
+                    empresa.setNomeEmpresa("Hiper");
+                }
+                empresa.save();
+
+                vaga.setEmpresa(empresa);
+                vaga.setCargo(cargo);
                 vaga.setEndereco(endereco);
 
                 vagas.add(vaga);

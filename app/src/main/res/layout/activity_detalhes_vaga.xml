@@ -3,9 +3,137 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:fitsSystemWindows="true"
-    android:orientation="vertical"
-    tools:context="sistemas2014.unifebe.edu.br.infojobs.Controller.DetalhesVaga">
+    tools:context="sistemas2014.unifebe.edu.br.infojobs.Controller.DetalhesVaga"
+    android:weightSum="1">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/horizontalScrollView"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_margin="20dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vaga:"
+                android:id="@+id/textViewVaga"
+                android:layout_gravity="center_vertical" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtVaga"
+                android:layout_gravity="center_horizontal"
+                android:editable="false" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Empresa:"
+                android:id="@+id/textViewEmpresa"
+                android:layout_gravity="center_vertical" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtEmpresa"
+                android:layout_gravity="center_horizontal"
+                android:editable="false" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cargo:"
+                android:id="@+id/textViewCargo"
+                android:layout_gravity="center_vertical" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtCargo"
+                android:layout_gravity="center_horizontal"
+                android:editable="false" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cidade:"
+                android:id="@+id/textViewCidade"
+                android:layout_gravity="center_vertical" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtCidade"
+                android:layout_gravity="center_horizontal"
+                android:editable="false" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bairro:"
+                android:id="@+id/TextViewBairro"
+                android:layout_gravity="center_vertical" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtBairro"
+                android:layout_gravity="center_horizontal"
+                android:editable="false" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Estado:"
+                android:id="@+id/textViewEstado"
+                android:layout_gravity="center_vertical" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtEstado"
+                android:layout_gravity="center_horizontal"
+                android:editable="false" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Salário:"
+                android:id="@+id/textViewSalario"
+                android:layout_gravity="center_vertical" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtSalario"
+                android:layout_gravity="center_horizontal"
+                android:editable="false" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Observações:"
+                android:id="@+id/textViewObservacoes"
+                android:layout_gravity="center_vertical" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtObservacoes"
+                android:layout_gravity="center_horizontal"
+                android:editable="false" />
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

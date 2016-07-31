@@ -57,8 +57,7 @@
         </activity>
         <activity
             android:name=".Controller.DetalhesVaga"
-            android:label="@string/title_activity_detalhes_vaga"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:label="@string/title_activity_detalhes_vaga"></activity>
     </application>
 
 </manifest>
