@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +18,8 @@ import sistemas2014.unifebe.edu.br.infojobs.Model.Vaga;
 import sistemas2014.unifebe.edu.br.infojobs.R;
 
 public class DetalhesVaga extends AppCompatActivity {
+    private Button btnCompartilhar;
+    private Button btnEnviarCurriculo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +49,26 @@ public class DetalhesVaga extends AppCompatActivity {
             txtEstado.setText(endereco.getEstado());
             txtSalario.setText(Double.toString(vaga.getSalario()));
             txtObservacoes.setText(vaga.getObservacoes());
-
-            Toast.makeText(getApplicationContext(), vaga.getDescricao(), Toast.LENGTH_LONG).show();
+        }else{
+            finish();
         }
+
+        btnCompartilhar = (Button) findViewById(R.id.btnCompartilhar);
+        btnCompartilhar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        btnEnviarCurriculo = (Button) findViewById(R.id.btnEnviarCurriculo);
+
+        btnEnviarCurriculo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
 }

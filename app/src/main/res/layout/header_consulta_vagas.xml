@@ -1,26 +1,83 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:rsb="http://schemas.android.com/apk/res-auto"
     android:baselineAligned="false"
     android:orientation="vertical">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
 
-        <EditText
-            android:layout_width="293dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/txtCidade"
-            android:hint="Cidade"
-            android:layout_weight="0.22" />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:layout_width="293dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtCidade"
+                android:hint="Cidade"
+                android:layout_weight="0.22" />
+
+        </android.support.design.widget.TextInputLayout>
 
         <ImageButton
             android:layout_width="26dp"
             android:layout_height="31dp"
             android:id="@+id/btnLocation"
             android:src="@android:drawable/ic_menu_mylocation" />
+
+    </LinearLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:gravity="center">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtCargo"
+            android:hint="Cargo" />
+    </android.support.design.widget.TextInputLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:gravity="center">
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:id="@+id/spiAreaNegocio" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"
+        android:gravity="center">
+
+        <com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/seekFaixaValor"
+            rsb:absoluteMaxValue="50000"
+            rsb:absoluteMinValue="500" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -34,5 +91,6 @@
             android:layout_height="wrap_content"
             android:text="Filtrar"
             android:id="@+id/btnFiltrar" />
+
     </LinearLayout>
 </LinearLayout>

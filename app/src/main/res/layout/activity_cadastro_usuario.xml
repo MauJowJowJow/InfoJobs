@@ -139,7 +139,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txtSenha"
                 android:hint="Senha"
-                android:password="true" />
+                android:inputType= "textPassword" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -151,7 +151,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txtConfSenha"
                 android:hint="Confirmar Senha"
-                android:password="true" />
+                android:inputType= "textPassword" />
             </android.support.design.widget.TextInputLayout>
 
 

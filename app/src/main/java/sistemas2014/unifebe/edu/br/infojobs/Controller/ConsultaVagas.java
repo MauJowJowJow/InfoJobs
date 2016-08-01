@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -36,6 +38,7 @@ public class ConsultaVagas extends Fragment {
     private View inflatedView;
     private EditText txtCidade;
     private Button btnFiltrar;
+    private RangeSeekBar<Integer> seekFaixaValor;
 
     private VagasAdapter vagasAdapter;
     private ArrayList<Vaga> vagas;
@@ -67,6 +70,8 @@ public class ConsultaVagas extends Fragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(inflatedView.getContext()));
         recyclerView.setAdapter(getVagas(header));
+
+        seekFaixaValor = (RangeSeekBar<Integer>) inflatedView.findViewById(R.id.seekFaixaValor);
 
         return inflatedView;
     }

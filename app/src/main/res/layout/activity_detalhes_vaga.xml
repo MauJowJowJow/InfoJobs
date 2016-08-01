@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txtVaga"
                 android:layout_gravity="center_horizontal"
-                android:editable="false" />
+                android:enabled="false" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txtEmpresa"
                 android:layout_gravity="center_horizontal"
-                android:editable="false" />
+                android:enabled="false" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txtCargo"
                 android:layout_gravity="center_horizontal"
-                android:editable="false" />
+                android:enabled="false" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txtCidade"
                 android:layout_gravity="center_horizontal"
-                android:editable="false" />
+                android:enabled="false" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -88,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txtBairro"
                 android:layout_gravity="center_horizontal"
-                android:editable="false" />
+                android:enabled="false" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -102,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txtEstado"
                 android:layout_gravity="center_horizontal"
-                android:editable="false" />
+                android:enabled="false" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -116,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txtSalario"
                 android:layout_gravity="center_horizontal"
-                android:editable="false" />
+                android:enabled="false" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -130,7 +130,21 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txtObservacoes"
                 android:layout_gravity="center_horizontal"
-                android:editable="false" />
+                android:enabled="false" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enviar Curriculo"
+                android:id="@+id/btnEnviarCurriculo"
+                android:layout_gravity="center_horizontal" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Compartilhar Vaga"
+                android:id="@+id/btnCompartilhar"
+                android:layout_gravity="center_horizontal" />
 
         </LinearLayout>
     </ScrollView>

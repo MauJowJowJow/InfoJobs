@@ -1,6 +1,5 @@
 package sistemas2014.unifebe.edu.br.infojobs.Controller.RecyclerAdapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
@@ -9,13 +8,14 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.provider.Settings;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
+import android.widget.Spinner;
+
+import com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,7 +23,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
-import sistemas2014.unifebe.edu.br.infojobs.Model.Endereco;
 import sistemas2014.unifebe.edu.br.infojobs.Model.Vaga;
 import sistemas2014.unifebe.edu.br.infojobs.R;
 
@@ -34,6 +33,9 @@ public class VagasHeaderViewHolder extends RecyclerView.ViewHolder {
     private VagasAdapter adapter;
     private Button btnFiltrar;
     private EditText txtCidade;
+    private EditText txtCargo;
+    private Spinner spiAreaNegocio;
+    private RangeSeekBar<Integer> seekFaixaValor;
     private ImageButton btnLocation;
 
     public VagasHeaderViewHolder(final View itemView, VagasAdapter adapter) {
@@ -41,9 +43,12 @@ public class VagasHeaderViewHolder extends RecyclerView.ViewHolder {
 
         this.adapter = adapter;
 
+        txtCargo = (EditText) itemView.findViewById(R.id.txtCargo);
         txtCidade = (EditText) itemView.findViewById(R.id.txtCidade);
-        btnFiltrar = (Button) itemView.findViewById(R.id.btnFiltrar);
+        spiAreaNegocio = (Spinner) itemView.findViewById(R.id.spiAreaNegocio);
+        seekFaixaValor = (RangeSeekBar<Integer>) itemView.findViewById(R.id.seekFaixaValor);
 
+        btnFiltrar = (Button) itemView.findViewById(R.id.btnFiltrar);
         btnFiltrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,7 +57,6 @@ public class VagasHeaderViewHolder extends RecyclerView.ViewHolder {
         });
 
         btnLocation = (ImageButton) itemView.findViewById(R.id.btnLocation);
-
         btnLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,8 +66,17 @@ public class VagasHeaderViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void filtraVagas(){
+        String where="";
+        String[] whereArgs = new String[4];
         ArrayList<Vaga> vagas = new ArrayList<>();
-        Iterator<Vaga> vagasAtuais = Vaga.findAll(Vaga.class);
+
+
+        if(txtCidade.getText().toString() != ""){
+            where += "endereco.cidade = ?";
+            whereArgs[0] = txtCidade.getText().toString();
+        }
+
+        Iterator<Vaga> vagasAtuais = Vaga.find(Vaga.class, where, whereArgs).iterator();
 
         while(vagasAtuais.hasNext()){
             Vaga vaga = vagasAtuais.next();
