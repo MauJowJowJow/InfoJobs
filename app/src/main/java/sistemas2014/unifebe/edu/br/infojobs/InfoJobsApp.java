@@ -34,7 +34,6 @@ public class InfoJobsApp extends Application {
         AppEventsLogger.activateApp(this);
 
         SugarContext.init(getApplicationContext());
-        Usuario.find(Usuario.class, "email = ?", "teste");
     }
 
     @Override

@@ -18,12 +18,16 @@ public class CadastroUsuario extends AppCompatActivity {
     private Usuario usuario;
     private EditText txtEmail;
     private EditText txtSenha;
+    private EditText txtConfSenha;
     private EditText txtNome;
     private EditText txtSobrenome;
     private EditText txtCidade;
     private EditText txtBairro;
     private EditText txtEndereco;
+    private EditText txtEstado;
     private EditText txtCEP;
+    private EditText txtTelCelular;
+    private EditText txtTelResidencial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,20 +36,42 @@ public class CadastroUsuario extends AppCompatActivity {
 
         txtEmail = (EditText) findViewById(R.id.txtEmail);
         txtSenha = (EditText) findViewById(R.id.txtSenha);
+        txtConfSenha = (EditText) findViewById(R.id.txtConfSenha);
         txtNome = (EditText) findViewById(R.id.txtNome);
         txtSobrenome = (EditText) findViewById(R.id.txtSobrenome);
         txtCidade = (EditText) findViewById(R.id.txtCidade);
         txtBairro = (EditText) findViewById(R.id.txtBairro);
         txtEndereco = (EditText) findViewById(R.id.txtEndereco);
         txtCEP = (EditText) findViewById(R.id.txtCEP);
+        txtEstado = (EditText) findViewById(R.id.txtEstado);
+        txtTelCelular = (EditText) findViewById(R.id.txtTelCelular);
+        txtTelResidencial = (EditText) findViewById(R.id.txtTelResidencial);
 
-        if (getIntent().getExtras() != null){
+        if (getIntent().getExtras() != null) {
             Long id = getIntent().getExtras().getLong("id");
             usuario = Usuario.findById(Usuario.class, id);
 
             txtEmail.setText(usuario.getEmail());
             txtSenha.setText(usuario.getSenha());
+            txtConfSenha.setText(usuario.getSenha());
             txtNome.setText(usuario.getNome());
+            txtSobrenome.setText(usuario.getSobrenome());
+            txtTelCelular.setText(usuario.getTelCelular());
+            txtTelResidencial.setText(usuario.getTelResidencial());
+
+            Endereco endereco = usuario.getEndereco();
+            if (endereco != null) {
+                txtCidade.setText(endereco.getCidade());
+                txtEndereco.setText(endereco.getLogradouro());
+                txtCEP.setText(endereco.getCEP());
+                txtEstado.setText(endereco.getEstado());
+                txtBairro.setText(endereco.getBairro());
+            }
+
+            txtEmail.setEnabled(false);
+            txtSenha.setEnabled(false);
+            txtConfSenha.setEnabled(false);
+
         }
 
         Button txtSalvar = (Button) findViewById(R.id.btnSalvar);
@@ -93,6 +119,7 @@ public class CadastroUsuario extends AppCompatActivity {
 
                     limpaTela();
                     Snackbar.make(view, "Usuário salvo com sucesso!", Snackbar.LENGTH_LONG).show();
+                    finish();
                 }
             }
         });
@@ -110,17 +137,25 @@ public class CadastroUsuario extends AppCompatActivity {
             return false;
         }
 
+        if(!txtSenha.getText().equals(txtConfSenha.getText())){
+            errValidacao  = "Senhas de confirmação não conferem!";
+            return false;
+        }
+
         return true;
     }
 
     private void limpaTela(){
         txtEmail.setText("");
         txtSenha.setText("");
+        txtConfSenha.setText("");
         txtNome.setText("");
         txtSobrenome.setText("");
         txtCidade.setText("");
         txtBairro.setText("");
         txtEndereco.setText("");
         txtCEP.setText("");
+        txtTelCelular.setText("");
+        txtTelResidencial.setText("");
     }
 }
