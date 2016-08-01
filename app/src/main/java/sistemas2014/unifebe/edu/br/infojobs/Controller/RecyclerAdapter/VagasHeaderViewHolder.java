@@ -2,6 +2,8 @@ package sistemas2014.unifebe.edu.br.infojobs.Controller.RecyclerAdapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -15,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
+import com.orm.SugarDb;
 import com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar;
 
 import java.io.IOException;
@@ -70,10 +73,13 @@ public class VagasHeaderViewHolder extends RecyclerView.ViewHolder {
         String[] whereArgs = new String[4];
         ArrayList<Vaga> vagas = new ArrayList<>();
 
+        SugarDb db = new SugarDb(itemView.getContext());
+        SQLiteDatabase sqLiteDatabase = db.getDB();
+
+        //Cursor cursor = sqLiteDatabase.query(Vaga.);
 
         if(txtCidade.getText().toString() != ""){
-            where += "endereco.cidade = ?";
-            whereArgs[0] = txtCidade.getText().toString();
+            where += "endereco.cidade = " + txtCidade.getText().toString();
         }
 
         Iterator<Vaga> vagasAtuais = Vaga.find(Vaga.class, where, whereArgs).iterator();
