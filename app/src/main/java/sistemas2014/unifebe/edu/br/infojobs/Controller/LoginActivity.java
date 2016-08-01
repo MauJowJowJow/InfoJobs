@@ -440,6 +440,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             Intent i = new Intent(getApplicationContext(), CadastroUsuario.class);
             i.putExtra("id", usuario.getId());
+
             startActivity(i);
         }
         setUsuarioLogado(usuario);

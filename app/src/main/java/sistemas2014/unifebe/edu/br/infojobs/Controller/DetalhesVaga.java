@@ -25,9 +25,9 @@ public class DetalhesVaga extends AppCompatActivity {
 
         if(getIntent().getExtras() != null){
             Vaga vaga = Vaga.findById(Vaga.class, getIntent().getExtras().getLong("id"));
-            Cargo cargo = Cargo.findById(Cargo.class, getIntent().getExtras().getLong("id"));
-            Endereco endereco = Endereco.findById(Endereco.class, getIntent().getExtras().getLong("id"));
-            Empresa empresa = Empresa.findById(Empresa.class, getIntent().getExtras().getLong("id"));
+            Cargo cargo = vaga.getCargo();
+            Endereco endereco = vaga.getEndereco();
+            Empresa empresa = vaga.getEmpresa();
 
             EditText txtVaga = (EditText) findViewById(R.id.txtVaga);
             EditText txtEmpresa = (EditText) findViewById(R.id.txtEmpresa);
@@ -46,7 +46,6 @@ public class DetalhesVaga extends AppCompatActivity {
             txtEstado.setText(endereco.getEstado());
             txtSalario.setText(Double.toString(vaga.getSalario()));
             txtObservacoes.setText(vaga.getObservacoes());
-
 
             Toast.makeText(getApplicationContext(), vaga.getDescricao(), Toast.LENGTH_LONG).show();
         }

@@ -1,7 +1,5 @@
 package sistemas2014.unifebe.edu.br.infojobs.Model;
 
-import android.content.Context;
-
 import com.orm.SugarRecord;
 
 /**
@@ -14,6 +12,8 @@ public class Usuario extends SugarRecord {
     private String senha;
     private String sobrenome;
     private Endereco endereco;
+    private String telCelular;
+    private String telResidencial;
 
     public Usuario(){}
 
@@ -59,5 +59,21 @@ public class Usuario extends SugarRecord {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    public String getTelCelular() {
+        return telCelular;
+    }
+
+    public void setTelCelular(String telCelular) {
+        this.telCelular = telCelular;
+    }
+
+    public String getTelResidencial() {
+        return telResidencial;
+    }
+
+    public void setTelResidencial(String telResidencial) {
+        this.telResidencial = telResidencial;
     }
 }

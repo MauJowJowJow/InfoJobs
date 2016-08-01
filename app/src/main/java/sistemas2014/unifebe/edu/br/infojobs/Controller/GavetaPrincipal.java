@@ -157,7 +157,13 @@ public class GavetaPrincipal extends AppCompatActivity
 
     private void setaUsuarioLogado(){
         if(usuario != null) {
-            txtUsuarioLogado.setText(usuario.getNome() + " " + usuario.getSobrenome());
+            String nomeUsuario = "";
+            nomeUsuario = usuario.getNome();
+
+            if(usuario.getSobrenome() != null){
+                nomeUsuario += " " + usuario.getSobrenome();
+            }
+            txtUsuarioLogado.setText(nomeUsuario);
             menuLogIn.setVisible(false);
         }else{
             txtUsuarioLogado.setText("Nenhum usuário logado");
