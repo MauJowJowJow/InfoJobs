@@ -27,7 +27,7 @@ public class VagasViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View view) {
                  if(getAdapterPosition() != 0){
-                     Vaga vaga = adapter.getItem(getAdapterPosition());
+                     Vaga vaga = adapter.getItem(getAdapterPosition()-1);
 
                      Intent i = new Intent(view.getContext(), DetalhesVaga.class);
                      i.putExtra("id", vaga.getId());

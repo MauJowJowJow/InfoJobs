@@ -104,7 +104,7 @@ public class VagasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         try {
             if (viewHolder instanceof VagasHeaderViewHolder) {
                 VagasHeaderViewHolder vh = (VagasHeaderViewHolder) viewHolder;
-                View v = mHeader.get(position-1);
+                //View v = mHeader.get(position-1);
 
             } else if (viewHolder instanceof VagasViewHolder) {
                 VagasViewHolder vh = (VagasViewHolder) viewHolder;
@@ -114,7 +114,6 @@ public class VagasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
 }

@@ -2,6 +2,7 @@ package sistemas2014.unifebe.edu.br.infojobs.Controller;
 
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import sistemas2014.unifebe.edu.br.infojobs.Controller.RecyclerAdapter.VagasAdapter;
+import sistemas2014.unifebe.edu.br.infojobs.Model.AreaNegocio;
 import sistemas2014.unifebe.edu.br.infojobs.Model.Cargo;
 import sistemas2014.unifebe.edu.br.infojobs.Model.Empresa;
 import sistemas2014.unifebe.edu.br.infojobs.Model.Endereco;
@@ -118,6 +120,45 @@ public class ConsultaVagas extends Fragment {
         vagasAdapter = new VagasAdapter();
         vagasAdapter.addHeader(header);
 
+        Iterator<AreaNegocio> areasNegocio = AreaNegocio.findAll(AreaNegocio.class);
+        if(!areasNegocio.hasNext()){
+            AreaNegocio areaNegocio = new AreaNegocio();
+            areaNegocio.setDescricao("Sistemas de Informação");
+            areaNegocio.save();
+
+            areaNegocio = new AreaNegocio();
+            areaNegocio.setDescricao("Psiquiatria");
+            areaNegocio.save();
+
+            areaNegocio = new AreaNegocio();
+            areaNegocio.setDescricao("Engenharia");
+            areaNegocio.save();
+
+            areaNegocio = new AreaNegocio();
+            areaNegocio.setDescricao("Medicina");
+            areaNegocio.save();
+
+            areaNegocio = new AreaNegocio();
+            areaNegocio.setDescricao("Advocacia");
+            areaNegocio.save();
+
+            areaNegocio = new AreaNegocio();
+            areaNegocio.setDescricao("Pedagogia");
+            areaNegocio.save();
+
+            areaNegocio = new AreaNegocio();
+            areaNegocio.setDescricao("Administração");
+            areaNegocio.save();
+
+            areaNegocio = new AreaNegocio();
+            areaNegocio.setDescricao("Design Gráfico");
+            areaNegocio.save();
+
+            areaNegocio = new AreaNegocio();
+            areaNegocio.setDescricao("Textil");
+            areaNegocio.save();
+        }
+
         Iterator<Vaga> vagasAtuais = Vaga.findAll(Vaga.class);
         if(vagasAtuais.hasNext()) {
             while (vagasAtuais.hasNext()) {
@@ -163,6 +204,11 @@ public class ConsultaVagas extends Fragment {
                 }else{
                     cargo.setNome("Analista");
                 }
+
+                if(i <= 10){
+                    cargo.setAreaNegocio(AreaNegocio.findById(AreaNegocio.class, Long.valueOf(i)));
+                }
+
                 cargo.save();
 
                 if (i < 5) {
@@ -173,6 +219,7 @@ public class ConsultaVagas extends Fragment {
                     empresa.setNomeEmpresa("Hiper");
                 }
                 empresa.save();
+
 
                 vaga.setEmpresa(empresa);
                 vaga.setCargo(cargo);
