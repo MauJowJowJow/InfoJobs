@@ -6,12 +6,16 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context="sistemas2014.unifebe.edu.br.infojobs.Controller.DetalhesVaga"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:focusable="true"
+    android:focusableInTouchMode="true"    >
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/horizontalScrollView">
+        android:id="@+id/horizontalScrollView"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
         <LinearLayout
             android:orientation="vertical"
@@ -146,20 +150,32 @@
                 android:layout_gravity="center_horizontal"
                 android:enabled="false" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Enviar Curriculo"
-                android:id="@+id/btnEnviarCurriculo"
-                android:layout_gravity="center_horizontal" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center">
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Compartilhar Vaga"
-                android:id="@+id/btnCompartilhar"
-                android:layout_gravity="center_horizontal" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Enviar Curriculo"
+                    android:id="@+id/btnEnviarCurriculo"
+                    android:layout_gravity="center_vertical"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
 
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Compartilhar Vaga"
+                    android:id="@+id/btnCompartilhar"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
