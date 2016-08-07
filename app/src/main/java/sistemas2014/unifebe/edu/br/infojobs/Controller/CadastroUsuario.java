@@ -137,7 +137,7 @@ public class CadastroUsuario extends AppCompatActivity {
             return false;
         }
 
-        if(!txtSenha.getText().equals(txtConfSenha.getText())){
+        if(!txtSenha.getText().toString().equals(txtConfSenha.getText().toString())){
             errValidacao  = "Senhas de confirmação não conferem!";
             return false;
         }

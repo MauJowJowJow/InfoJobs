@@ -63,6 +63,13 @@ public class GavetaPrincipal extends AppCompatActivity
 
         txtUsuarioLogado = (TextView) nav_heaver_gaveta.findViewById(R.id.txtUsuarioLogado);
         menuLogIn = (MenuItem) gaveta_principal.findItem(R.id.nav_login);
+
+        onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_vagas));
+
+        if(!UsuarioLogado.findAll(UsuarioLogado.class).hasNext()){
+            Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(i);
+        }
     }
 
     @Override

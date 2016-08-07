@@ -1,5 +1,7 @@
 package sistemas2014.unifebe.edu.br.infojobs.Controller;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -20,6 +22,7 @@ import sistemas2014.unifebe.edu.br.infojobs.R;
 public class DetalhesVaga extends AppCompatActivity {
     private Button btnCompartilhar;
     private Button btnEnviarCurriculo;
+    private Vaga vaga;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +30,8 @@ public class DetalhesVaga extends AppCompatActivity {
         setContentView(R.layout.activity_detalhes_vaga);
 
         if(getIntent().getExtras() != null){
-            Vaga vaga = Vaga.findById(Vaga.class, getIntent().getExtras().getLong("id"));
+            vaga = Vaga.findById(Vaga.class, getIntent().getExtras().getLong("id"));
+
             Cargo cargo = vaga.getCargo();
             Endereco endereco = vaga.getEndereco();
             Empresa empresa = vaga.getEmpresa();
@@ -39,6 +43,7 @@ public class DetalhesVaga extends AppCompatActivity {
             EditText txtBairro = (EditText) findViewById(R.id.txtBairro);
             EditText txtEstado = (EditText) findViewById(R.id.txtEstado);
             EditText txtSalario = (EditText) findViewById(R.id.txtSalario);
+            EditText txtContato = (EditText) findViewById(R.id.txtContato);
             EditText txtObservacoes = (EditText) findViewById(R.id.txtObservacoes);
 
             txtVaga.setText(vaga.getDescricao());
@@ -48,6 +53,7 @@ public class DetalhesVaga extends AppCompatActivity {
             txtBairro.setText(endereco.getBairro());
             txtEstado.setText(endereco.getEstado());
             txtSalario.setText(Double.toString(vaga.getSalario()));
+            txtContato.setText(empresa.getEmail());
             txtObservacoes.setText(vaga.getObservacoes());
         }else{
             finish();
@@ -66,9 +72,21 @@ public class DetalhesVaga extends AppCompatActivity {
         btnEnviarCurriculo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                enviaCurriculo();
             }
         });
+    }
+
+    private void enviaCurriculo(){
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:" + vaga.getEmpresa().getEmail()));
+        intent.putExtra(Intent.EXTRA_EMAIL, vaga.getEmpresa().getEmail());
+        intent.putExtra(Intent.EXTRA_TEXT, "Segue o curriculo em anexo.");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "InfoJobs - Curriculo Vaga " + vaga.getId() + " - Cargo " + vaga.getCargo().getNome());
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
 }
