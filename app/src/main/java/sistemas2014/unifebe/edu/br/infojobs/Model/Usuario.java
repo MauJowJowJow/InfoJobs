@@ -14,6 +14,7 @@ public class Usuario extends SugarRecord {
     private Endereco endereco;
     private String telCelular;
     private String telResidencial;
+    private String pathCurriculo;
 
     public Usuario(){}
 
@@ -75,5 +76,13 @@ public class Usuario extends SugarRecord {
 
     public void setTelResidencial(String telResidencial) {
         this.telResidencial = telResidencial;
+    }
+
+    public String getPathCurriculo() {
+        return pathCurriculo;
+    }
+
+    public void setPathCurriculo(String pathCurriculo) {
+        this.pathCurriculo = pathCurriculo;
     }
 }

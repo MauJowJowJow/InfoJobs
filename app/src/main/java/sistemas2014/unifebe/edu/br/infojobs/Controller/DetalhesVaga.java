@@ -3,6 +3,7 @@ package sistemas2014.unifebe.edu.br.infojobs.Controller;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -19,12 +20,15 @@ import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
 
+import java.io.File;
 import java.util.Arrays;
 
 import sistemas2014.unifebe.edu.br.infojobs.Helpers.BuscaPermissoesFB;
 import sistemas2014.unifebe.edu.br.infojobs.Model.Cargo;
 import sistemas2014.unifebe.edu.br.infojobs.Model.Empresa;
 import sistemas2014.unifebe.edu.br.infojobs.Model.Endereco;
+import sistemas2014.unifebe.edu.br.infojobs.Model.Usuario;
+import sistemas2014.unifebe.edu.br.infojobs.Model.UsuarioLogado;
 import sistemas2014.unifebe.edu.br.infojobs.Model.Vaga;
 import sistemas2014.unifebe.edu.br.infojobs.R;
 
@@ -87,10 +91,55 @@ public class DetalhesVaga extends AppCompatActivity {
     }
 
     private void enviaCurriculo(){
+        Usuario usuario = null;
+        File curriculo;
+        Uri uri = null;
+
+        if(UsuarioLogado.findAll(UsuarioLogado.class).hasNext()) {
+            usuario = UsuarioLogado.findAll(UsuarioLogado.class).next().getUsuario();
+
+            if(usuario.getPathCurriculo() != null) {
+                curriculo = new File(usuario.getPathCurriculo());
+                uri = Uri.fromFile(curriculo);
+            }
+        }
+
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:" + vaga.getEmpresa().getEmail()));
         intent.putExtra(Intent.EXTRA_EMAIL, vaga.getEmpresa().getEmail());
-        intent.putExtra(Intent.EXTRA_TEXT, "Segue o curriculo em anexo.");
+
+        if(uri != null){
+            intent.putExtra(Intent.EXTRA_TEXT, "Segue o curriculo em anexo.");
+            intent.putExtra(Intent.EXTRA_STREAM, uri);
+        }else{
+            if(usuario != null){
+                String dados="";
+
+                dados = "Dados do interessado: " + System.getProperty("line.separator") +
+                        "Nome: " + usuario.getNome();
+
+                if(usuario.getSobrenome() != null) {
+                    dados += " " + usuario.getSobrenome();
+                }
+
+                dados += System.getProperty("line.separator");
+
+                if(usuario.getTelCelular() != null) {
+                    dados += "Contato: " + usuario.getTelCelular() + System.getProperty("line.separator");
+                }
+
+                if(usuario.getTelResidencial() != null){
+                    if(!usuario.getTelCelular().isEmpty()) {
+                        dados += "Contato: ";
+                    }else{
+                        dados += " ou: ";
+                    }
+                    dados += usuario.getTelResidencial() + System.getProperty("line.separator");
+                }
+
+                intent.putExtra(Intent.EXTRA_TEXT, dados);
+            }
+        }
         intent.putExtra(Intent.EXTRA_SUBJECT, "InfoJobs - Curriculo Vaga " + vaga.getId() + " - Cargo " + vaga.getCargo().getNome());
 
         if (intent.resolveActivity(getPackageManager()) != null) {
