@@ -10,7 +10,7 @@ public class Vaga extends SugarRecord {
     private Cargo cargo;
     private Endereco endereco;
     private Empresa empresa;
-    private double salario;
+    private String salario;
     private String observacoes;
 
     public Vaga(){
@@ -49,11 +49,11 @@ public class Vaga extends SugarRecord {
         this.empresa = empresa;
     }
 
-    public double getSalario() {
+    public String getSalario() {
         return salario;
     }
 
-    public void setSalario(double salario) {
+    public void setSalario(String salario) {
         this.salario = salario;
     }
 

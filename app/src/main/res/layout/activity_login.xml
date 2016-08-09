@@ -67,13 +67,15 @@
 
             <Button
                 android:id="@+id/email_sign_in_button"
-                style="?android:textAppearanceSmall"
                 android:layout_width="169dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/action_sign_in_Login"
                 android:textStyle="bold"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                style="@style/Base.ThemeOverlay.AppCompat.Dark"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#27408B"/>
 
         </LinearLayout>
     </ScrollView>
@@ -92,7 +94,7 @@
             android:layout_gravity="center_horizontal"
             android:textSize="15dp"
             android:onClick="onClick"
-            android:clickable="true"/>
+            android:clickable="false"/>
     </LinearLayout>
 
     <LinearLayout

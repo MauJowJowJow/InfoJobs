@@ -3,7 +3,22 @@
     android:layout_height="wrap_content"
     xmlns:rsb="http://schemas.android.com/apk/res-auto"
     android:baselineAligned="false"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="35dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Consulte pelos seguintes filtros:"
+            android:id="@+id/textView5"
+            android:textSize="16dp"
+            android:textColor="#000000" />
+    </LinearLayout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal"
@@ -18,7 +33,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:layout_width="293dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtCidade"
                 android:hint="Cidade"
@@ -36,7 +51,7 @@
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="68dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:gravity="center">
@@ -51,7 +66,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="53dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:gravity="center">
@@ -72,6 +87,16 @@
         android:paddingBottom="10dp"
         android:gravity="center">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Filtrar pela faixa salarial:"
+            android:id="@+id/textView3"
+            android:layout_gravity="left"
+            android:layout_marginTop="15dp"
+            android:textSize="15dp"
+            android:textColor="#000000" />
+
         <com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -79,19 +104,42 @@
             rsb:absoluteMaxValue="35"
             rsb:absoluteMinValue="0" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*Multiplicado por Milhar"
+            android:id="@+id/textView2"
+            android:layout_gravity="left"
+            android:textSize="10dp" />
+
+
     </LinearLayout>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:gravity="center_vertical|center_horizontal">
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="218dp"
             android:layout_height="wrap_content"
             android:text="Filtrar"
-            android:id="@+id/btnFiltrar" />
+            android:id="@+id/btnFiltrar"
+            android:layout_gravity="center_horizontal"
+            style="@style/Base.ThemeOverlay.AppCompat.Dark"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#27408B" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vagas:"
+            android:id="@+id/textView4"
+            android:textSize="20dp"
+            android:textColor="#000000"
+            android:layout_gravity="left" />
 
     </LinearLayout>
+
 </LinearLayout>

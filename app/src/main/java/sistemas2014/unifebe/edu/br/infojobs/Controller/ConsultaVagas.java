@@ -197,16 +197,46 @@ public class ConsultaVagas extends Fragment {
                 endereco.setEstado("SC");
                 endereco.save();
 
-                vaga.setDescricao("Vaga " + i);
+                if(i==1){
+                    vaga.setDescricao("Gerente de Marketing");
+                }else if (i==2){
+                    vaga.setDescricao("Engenheiro Eletricista");
+                }else if (i==3){
+                    vaga.setDescricao("Gerente Geral");
+                }else if (i==4){
+                    vaga.setDescricao("Auxiliar de Escritório");
+                }else if (i==5){
+                    vaga.setDescricao("Programador Júnior");
+                }else if (i==6){
+                    vaga.setDescricao("Consultor de Vendas");
+                }else if (i==7){
+                    vaga.setDescricao("Médico Cardiologista");
+                }else if (i==8){
+                    vaga.setDescricao("Vendedor");
+                }else if (i==9){
+                    vaga.setDescricao("Analista Financeiro");
+                }else if (i==10){
+                    vaga.setDescricao("Coordenador Educacional");
+                }else if (i==11){
+                    vaga.setDescricao("Analista de Redes");
+                }else if (i==12){
+                    vaga.setDescricao("Desenvolvedor Java");
+                }else if (i==13){
+                    vaga.setDescricao("Corretor de Imóveis");
+                }else if (i==14){
+                    vaga.setDescricao("Gerente Comercial");
+                }else if (i==15){
+                    vaga.setDescricao("Secretária Pessoal");
+                }
 
                 vaga.setObservacoes("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
 
                 if (i < 5) {
-                    vaga.setSalario(1500.00);
+                    vaga.setSalario("1.500,00");
                 } else if(i > 5 && i < 10){
-                    vaga.setSalario(5900.00);
+                    vaga.setSalario("5.900,00");
                 }else{
-                    vaga.setSalario(900.00);
+                    vaga.setSalario("9.000,00");
                 }
 
                 if (i < 5) {

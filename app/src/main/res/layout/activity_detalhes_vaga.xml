@@ -29,126 +29,144 @@
                 android:layout_height="wrap_content"
                 android:text="Vaga"
                 android:id="@+id/textViewVaga"
-                android:layout_gravity="center_vertical" />
+                android:layout_gravity="center_vertical"
+                android:textColor="#000000" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtVaga"
                 android:layout_gravity="center_horizontal"
-                android:enabled="false" />
+                android:enabled="false"
+                android:textColor="@color/com_facebook_likeboxcountview_text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Empresa"
                 android:id="@+id/textViewEmpresa"
-                android:layout_gravity="center_vertical" />
+                android:layout_gravity="center_vertical"
+                android:textColor="#000000"/>
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtEmpresa"
                 android:layout_gravity="center_horizontal"
-                android:enabled="false" />
+                android:enabled="false"
+                android:textColor="@color/com_facebook_likeboxcountview_text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cargo"
                 android:id="@+id/textViewCargo"
-                android:layout_gravity="center_vertical" />
+                android:layout_gravity="center_vertical"
+                android:textColor="#000000"/>
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtCargo"
                 android:layout_gravity="center_horizontal"
-                android:enabled="false" />
+                android:enabled="false"
+                android:textColor="@color/com_facebook_likeboxcountview_text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cidade"
                 android:id="@+id/textViewCidade"
-                android:layout_gravity="center_vertical" />
+                android:layout_gravity="center_vertical"
+                android:textColor="#000000" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtCidade"
                 android:layout_gravity="center_horizontal"
-                android:enabled="false" />
+                android:enabled="false"
+                android:textColor="@color/com_facebook_likeboxcountview_text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Bairro"
                 android:id="@+id/TextViewBairro"
-                android:layout_gravity="center_vertical" />
+                android:layout_gravity="center_vertical"
+                android:textColor="#000000" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtBairro"
                 android:layout_gravity="center_horizontal"
-                android:enabled="false" />
+                android:enabled="false"
+                android:textColor="@color/com_facebook_likeboxcountview_text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Estado"
                 android:id="@+id/textViewEstado"
-                android:layout_gravity="center_vertical" />
+                android:layout_gravity="center_vertical"
+                android:textColor="#000000" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtEstado"
                 android:layout_gravity="center_horizontal"
-                android:enabled="false" />
+                android:enabled="false"
+                android:textColor="@color/com_facebook_likeboxcountview_text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Salário"
                 android:id="@+id/textViewSalario"
-                android:layout_gravity="center_vertical" />
+                android:layout_gravity="center_vertical"
+                android:textColor="#000000" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtSalario"
                 android:layout_gravity="center_horizontal"
-                android:enabled="false" />
+                android:enabled="false"
+                android:textColor="@color/com_facebook_likeboxcountview_text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Contato"
                 android:id="@+id/textViewContato"
-                android:layout_gravity="center_vertical" />
+                android:layout_gravity="center_vertical"
+                android:textColor="#000000" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtContato"
                 android:layout_gravity="center_horizontal"
-                android:enabled="false" />
+                android:enabled="false"
+                android:textColor="@color/com_facebook_likeboxcountview_text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Observações"
                 android:id="@+id/textViewObservacoes"
-                android:layout_gravity="center_vertical" />
+                android:layout_gravity="center_vertical"
+                android:textColor="#000000" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtObservacoes"
                 android:layout_gravity="center_horizontal"
-                android:enabled="false" />
+                android:enabled="false"
+                android:textColor="@color/com_facebook_likeboxcountview_text_color" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -163,7 +181,10 @@
                     android:layout_gravity="center_vertical"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
+                    android:layout_alignParentStart="true"
+                    style="@style/Base.ThemeOverlay.AppCompat.Dark"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#27408B"/>
 
                 <Button
                     android:layout_width="wrap_content"
@@ -173,7 +194,10 @@
                     android:layout_gravity="center_vertical|right"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true" />
+                    android:layout_alignParentEnd="true"
+                    style="@style/Base.ThemeOverlay.AppCompat.Dark"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#27408B"/>
 
             </RelativeLayout>
         </LinearLayout>

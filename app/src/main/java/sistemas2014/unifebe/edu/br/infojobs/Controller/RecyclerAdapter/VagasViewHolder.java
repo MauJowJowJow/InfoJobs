@@ -16,12 +16,14 @@ import sistemas2014.unifebe.edu.br.infojobs.R;
 public class VagasViewHolder extends RecyclerView.ViewHolder {
     private VagasAdapter adapter;
     public TextView txtNome;
+    public TextView txtSalario;
 
     public VagasViewHolder(View itemView, final VagasAdapter adapter) {
         super(itemView);
 
         this.adapter = adapter;
         txtNome = (TextView) itemView.findViewById(R.id.txtNome);
+        txtSalario = (TextView) itemView.findViewById(R.id.txtSalario);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override

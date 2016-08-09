@@ -65,7 +65,7 @@ public class DetalhesVaga extends AppCompatActivity {
             txtCidade.setText(endereco.getCidade());
             txtBairro.setText(endereco.getBairro());
             txtEstado.setText(endereco.getEstado());
-            txtSalario.setText(Double.toString(vaga.getSalario()));
+            txtSalario.setText(vaga.getSalario());
             txtContato.setText(empresa.getEmail());
             txtObservacoes.setText(vaga.getObservacoes());
         }else{
