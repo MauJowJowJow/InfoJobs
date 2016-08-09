@@ -1,8 +1,6 @@
 package sistemas2014.unifebe.edu.br.infojobs.Controller;
 
 import android.content.Context;
-import android.content.Intent;
-import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -168,10 +166,24 @@ public class ConsultaVagas extends Fragment {
             }
         }else {
 
+            Empresa empresa = new Empresa();
+            empresa.setNomeEmpresa("TecMicro");
+            empresa.setEmail("maumau.g.o@unifebe.edu.br");
+            empresa.save();
+
+            empresa = new Empresa();
+            empresa.setNomeEmpresa("T-Systems");
+            empresa.setEmail("maumau.g@gmail.com");
+            empresa.save();
+
+            empresa = new Empresa();
+            empresa.setNomeEmpresa("Hiper");
+            empresa.setEmail("maumau.g.o@hotmail.com");
+            empresa.save();
+
             for (int i = 1; i < 15; i++) {
                 Vaga vaga = new Vaga();
                 Cargo cargo = new Cargo();
-                Empresa empresa = new Empresa();
 
                 Endereco endereco = new Endereco();
                 if (i < 7) {
@@ -211,15 +223,13 @@ public class ConsultaVagas extends Fragment {
 
                 cargo.save();
 
-                if (i < 5) {
-                    empresa.setNomeEmpresa("TecMicro");
-                } else if(i > 5 && i < 10){
-                    empresa.setNomeEmpresa("T-Systems");
+                if(i< 5) {
+                    empresa = Empresa.findById(Empresa.class, 1);
+                }else if(i < 10){
+                    empresa = Empresa.findById(Empresa.class, 2);
                 }else{
-                    empresa.setNomeEmpresa("Hiper");
+                    empresa = Empresa.findById(Empresa.class, 3);
                 }
-                empresa.save();
-
 
                 vaga.setEmpresa(empresa);
                 vaga.setCargo(cargo);

@@ -21,7 +21,7 @@
     <string name="action_sign_in_Login">Login</string>
     <string name="prompt_password_senha">Senha</string>
     <string name="title_activiy_Login">Realize seu login</string>
-    <string name="activity_login_registrar">Crie seu cadastro ou</string>
+    <string name="activity_login_registrar"><u>Crie seu cadastro</u> ou</string>
     <string name="activity_login_novo_no_app">Primeira vez no InfoJobs?</string>
     <string name="title_activity_consuta_vagas_view">ConsutaVagasView</string>
 

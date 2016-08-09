@@ -8,6 +8,7 @@ import com.orm.SugarRecord;
 public class Empresa extends SugarRecord {
 
     private String nomeEmpresa;
+    private String email;
 
     public Empresa(){
 
@@ -19,5 +20,13 @@ public class Empresa extends SugarRecord {
 
     public void setNomeEmpresa(String nomeEmpresa) {
         this.nomeEmpresa = nomeEmpresa;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

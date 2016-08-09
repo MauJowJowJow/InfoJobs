@@ -131,7 +131,9 @@
                 android:textSize="15dp"
                 android:onClick="onClick"
                 android:clickable="true"
-                android:layout_gravity="left|center" />
+                android:layout_gravity="left|center"
+                android:linksClickable="false"
+                android:singleLine="true" />
         </LinearLayout>
 
         <LinearLayout

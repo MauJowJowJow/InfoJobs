@@ -14,6 +14,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <provider
         android:name="com.facebook.FacebookContentProvider"
@@ -45,9 +47,10 @@
             android:name=".Controller.LoginActivity"
             android:label="@string/title_activiy_Login" />
         <activity android:name=".Controller.CadastroUsuario" />
+
         <activity
             android:name=".Controller.GavetaPrincipal"
-            android:label="@string/title_activity_gaveta_principal"
+            android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -55,9 +58,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".Controller.DetalhesVaga"
-            android:label="@string/title_activity_detalhes_vaga"></activity>
+            android:label="@string/title_activity_detalhes_vaga">
+
+            <intent-filter>
+                <action android:name="android.intent.action.SENDTO" />
+                <data android:scheme="mailto" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

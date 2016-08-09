@@ -59,10 +59,30 @@ public class GavetaPrincipal extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         View nav_heaver_gaveta = navigationView.getHeaderView(0);
+
+        nav_heaver_gaveta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(UsuarioLogado.findAll(UsuarioLogado.class).hasNext()){
+                    Intent i = new Intent(getApplicationContext(), CadastroUsuario.class);
+                    i.putExtra("id", usuario.getId());
+
+                    startActivity(i);
+                }
+            }
+        });
+
         Menu gaveta_principal = navigationView.getMenu();
 
         txtUsuarioLogado = (TextView) nav_heaver_gaveta.findViewById(R.id.txtUsuarioLogado);
         menuLogIn = (MenuItem) gaveta_principal.findItem(R.id.nav_login);
+
+        onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_vagas));
+
+        if(!UsuarioLogado.findAll(UsuarioLogado.class).hasNext()){
+            Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(i);
+        }
     }
 
     @Override
