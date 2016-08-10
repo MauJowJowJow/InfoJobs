@@ -9,10 +9,10 @@
             android:id="@+id/nav_login"
             android:icon="@drawable/login"
             android:title="Login" />
-        <item
+        <!--item
             android:id="@+id/nav_share"
             android:icon="@drawable/ic_menu_share"
-            android:title="Compartilhe" />
+            android:title="Compartilhe" /-->
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/info"

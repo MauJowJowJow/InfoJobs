@@ -81,10 +81,6 @@ public class GavetaPrincipal extends AppCompatActivity
 
         onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_vagas));
 
-
-
-
-
         if(!UsuarioLogado.findAll(UsuarioLogado.class).hasNext()){
             Intent i = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(i);
@@ -146,8 +142,6 @@ public class GavetaPrincipal extends AppCompatActivity
                 break;
             case R.id.nav_login:
                 i = new Intent(getApplicationContext(), LoginActivity.class);
-                break;
-            case R.id.nav_share:
                 break;
             case R.id.nav_about:
                 i = new Intent(getApplicationContext(), Sobre.class);

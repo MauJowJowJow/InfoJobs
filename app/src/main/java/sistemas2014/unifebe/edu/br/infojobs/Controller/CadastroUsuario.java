@@ -8,9 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,8 +23,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.channels.FileChannel;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import sistemas2014.unifebe.edu.br.infojobs.Model.AreaNegocio;
 import sistemas2014.unifebe.edu.br.infojobs.Model.Endereco;
 import sistemas2014.unifebe.edu.br.infojobs.Model.Usuario;
 import sistemas2014.unifebe.edu.br.infojobs.Model.UsuarioLogado;
@@ -31,6 +37,7 @@ public class CadastroUsuario extends AppCompatActivity {
     private static final int READ_REQUEST_CODE = 42;
 
     private Uri uriCurriculo = null;
+    private ArrayAdapter<String> estados;
 
     private String errValidacao;
     private Usuario usuario;
@@ -42,7 +49,7 @@ public class CadastroUsuario extends AppCompatActivity {
     private EditText txtCidade;
     private EditText txtBairro;
     private EditText txtEndereco;
-    private EditText txtEstado;
+    private Spinner spinnerUF;
     private EditText txtCEP;
     private EditText txtTelCelular;
     private EditText txtTelResidencial;
@@ -62,9 +69,11 @@ public class CadastroUsuario extends AppCompatActivity {
         txtBairro = (EditText) findViewById(R.id.txtBairro);
         txtEndereco = (EditText) findViewById(R.id.txtEndereco);
         txtCEP = (EditText) findViewById(R.id.txtCEP);
-        txtEstado = (EditText) findViewById(R.id.txtEstado);
+        spinnerUF = (Spinner) findViewById(R.id.spinnerUF);
         txtTelCelular = (EditText) findViewById(R.id.txtTelCelular);
         txtTelResidencial = (EditText) findViewById(R.id.txtTelResidencial);
+
+        spinnerUF.setAdapter(buscaEstados());
 
         if (getIntent().getExtras() != null) {
             Long id = getIntent().getExtras().getLong("id");
@@ -83,7 +92,7 @@ public class CadastroUsuario extends AppCompatActivity {
                 if(endereco.getCidade() != null) txtCidade.setText(endereco.getCidade());
                 if(endereco.getLogradouro() != null) txtEndereco.setText(endereco.getLogradouro());
                 if(endereco.getCEP() != null) txtCEP.setText(endereco.getCEP());
-                if(endereco.getEstado() != null) txtEstado.setText(endereco.getEstado());
+                if(endereco.getEstado() != null) spinnerUF.setSelection(achaEstado(endereco.getEstado()));
                 if(endereco.getBairro() != null) txtBairro.setText(endereco.getBairro());
             }
 
@@ -104,6 +113,7 @@ public class CadastroUsuario extends AppCompatActivity {
         txtSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                boolean fazLogin = false;
 
                 if(!valida()){
                     Snackbar.make(view, errValidacao, Snackbar.LENGTH_LONG).show();
@@ -140,15 +150,28 @@ public class CadastroUsuario extends AppCompatActivity {
                     endereco.setBairro(txtBairro.getText().toString());
                     endereco.setLogradouro(txtEndereco.getText().toString());
                     endereco.setCEP(txtCEP.getText().toString());
+                    endereco.setEstado(spinnerUF.getSelectedItem().toString());
 
                     endereco.save();
                     usuario.setEndereco(endereco);
                     salvaCurriculo();
 
+                    if(usuario.getId() == null){
+                        fazLogin=true;
+                    }
                     usuario.save();
 
+                    if(fazLogin){
+                        UsuarioLogado.deleteAll(UsuarioLogado.class);
+                        UsuarioLogado usuarioLogado = new UsuarioLogado();
+                        usuarioLogado.setUsuario(usuario);
+
+                        usuarioLogado.save();
+                    }
+
                     limpaTela();
-                    Snackbar.make(view, "Usuário salvo com sucesso!", Snackbar.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Usuário salvo com sucesso!", Toast.LENGTH_LONG).show();
+                    //Snackbar.make(view, "Usuário salvo com sucesso!", Snackbar.LENGTH_LONG).show();
                     finish();
                 }
             }
@@ -275,5 +298,51 @@ public class CadastroUsuario extends AppCompatActivity {
         }*/
 
         usuario.setPathCurriculo(newFile.getPath());
+    }
+
+    private ArrayAdapter<String> buscaEstados(){
+        estados = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line);
+
+        estados.add("AC"); // Acre
+        estados.add("AL"); // Alagoas
+        estados.add("AP"); // Amapá
+        estados.add("AM"); // Amazonas
+        estados.add("BA"); // Bahia
+        estados.add("CE"); // Ceará
+        estados.add("DF"); // Distrito Federal
+        estados.add("ES"); // Espírito Santo
+        estados.add("GO"); // Goiás
+        estados.add("MA"); // Maranhão
+        estados.add("MT"); // Mato Grosso
+        estados.add("MS"); // Mato Grosso do Sul
+        estados.add("MG"); // Minas Gerais
+        estados.add("PA"); // Pará
+        estados.add("PB"); // Paraíba
+        estados.add("PR"); // Paraná
+        estados.add("PE"); // Pernambuco
+        estados.add("PI"); // Piauí
+        estados.add("RR"); // Roraima
+        estados.add("RO"); // Rondônia
+        estados.add("RJ"); // Rio de Janeiro
+        estados.add("RN"); // Rio Grande do Norte
+        estados.add("RS"); // Rio Grande do Sul
+        estados.add("SC"); // Santa Catarina
+        estados.add("SP"); // São Paulo
+        estados.add("SE"); // Sergipe
+        estados.add("TO"); // Tocantins
+
+        return estados;
+    }
+
+    private int achaEstado(String UF){
+        int i=0;
+
+        for(int j = 0; j <= estados.getCount(); j++){
+            if(estados.getItem(j).equals(UF)){
+                return j;
+            }
+        }
+
+        return i;
     }
 }
