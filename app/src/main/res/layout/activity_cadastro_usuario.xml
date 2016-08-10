@@ -198,7 +198,10 @@
                 android:layout_height="wrap_content"
                 android:text="Salvar"
                 android:id="@+id/btnSalvar"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                style="@style/Base.ThemeOverlay.AppCompat.Dark"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#27408B"/>
 
         </LinearLayout>
     </ScrollView>

@@ -110,7 +110,7 @@ public class VagasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 VagasViewHolder vh = (VagasViewHolder) viewHolder;
 
                 vh.txtNome.setText(mData.get(position-1).getDescricao());
-                vh.txtSalario.setText(String.valueOf(mData.get(position-1).getSalario()));
+                vh.txtSalario.setText("R$ "+String.valueOf(mData.get(position-1).getSalario()));
             }
         } catch (Exception e) {
             e.printStackTrace();

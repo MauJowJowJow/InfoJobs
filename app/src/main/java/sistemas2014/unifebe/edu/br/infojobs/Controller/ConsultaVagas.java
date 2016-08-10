@@ -232,11 +232,11 @@ public class ConsultaVagas extends Fragment {
                 vaga.setObservacoes("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
 
                 if (i < 5) {
-                    vaga.setSalario("1.500,00");
+                    vaga.setSalario(1500.99);
                 } else if(i > 5 && i < 10){
-                    vaga.setSalario("5.900,00");
+                    vaga.setSalario(5900.25);
                 }else{
-                    vaga.setSalario("9.000,00");
+                    vaga.setSalario(9999.99);
                 }
 
                 if (i < 5) {

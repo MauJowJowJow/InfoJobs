@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -40,6 +41,7 @@ public class GavetaPrincipal extends AppCompatActivity
     private Usuario usuario;
     private TextView txtUsuarioLogado;
     private MenuItem menuLogIn;
+    private MenuItem menuSobre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,10 +81,15 @@ public class GavetaPrincipal extends AppCompatActivity
 
         onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_vagas));
 
+
+
+
+
         if(!UsuarioLogado.findAll(UsuarioLogado.class).hasNext()){
             Intent i = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(i);
         }
+
     }
 
     @Override
@@ -143,6 +150,7 @@ public class GavetaPrincipal extends AppCompatActivity
             case R.id.nav_share:
                 break;
             case R.id.nav_about:
+                i = new Intent(getApplicationContext(), Sobre.class);
                 break;
         }
 
